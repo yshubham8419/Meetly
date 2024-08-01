@@ -26,7 +26,8 @@ val Size360 = 36.dp
 val Size380 = 38.dp
 val Size400 = 40.dp
 val Size480 = 48.dp
-
+val Size520 = 52.dp
+val Size580 = 58.dp
 
 val TextSize10 = 10.sp
 val TextSize12 = 12.sp
