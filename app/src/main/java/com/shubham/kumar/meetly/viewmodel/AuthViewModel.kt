@@ -50,7 +50,7 @@ class AuthViewModel @Inject constructor(
     }
     fun verifyPhoneNumber(timeoutSeconds: Long, activity: Activity) {
         viewModelScope.launch {
-            authRepository.verifyPhoneNumber(phoneNumber, timeoutSeconds, activity)
+            authRepository.verifyPhoneNumber("+91$phoneNumber", timeoutSeconds, activity)
         }
     }
 

@@ -68,6 +68,13 @@ fun EnterOTP(authViewModel: AuthViewModel, navController: NavController) {
                 }
             }
         }
+        if(authViewModel.authState is AuthState.VerificationCompleted){
+            navController.navigate(Screens.Dashboard.path){
+                popUpTo(Screens.Auth.path){
+                    inclusive = true
+                }
+            }
+        }
     }
     Column(
         modifier = Modifier
@@ -76,7 +83,7 @@ fun EnterOTP(authViewModel: AuthViewModel, navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(80.dp))
-        Column(modifier = Modifier.fillMaxHeight(0.5f),
+        Column(modifier = Modifier.fillMaxHeight(0.6f),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 text = "OTP Verification",
@@ -91,7 +98,7 @@ fun EnterOTP(authViewModel: AuthViewModel, navController: NavController) {
             Text(text = buildAnnotatedString {
                 append("to ")
                 withStyle(SpanStyle(color = Black100, fontWeight = FontWeight(500))) {
-                    append(" +${authViewModel.phoneNumber}")
+                    append(" +91 ${authViewModel.phoneNumber}")
                 }
             }, color = Black70)
             Spacer(modifier = Modifier.weight(1f))

@@ -78,7 +78,7 @@ fun EnterPhone(authViewModel: AuthViewModel, navController: NavController) {
             .fillMaxHeight(),
     ) {
         Spacer(modifier = Modifier.height(80.dp))
-        Column(modifier = Modifier.fillMaxHeight(0.5f)) {
+        Column(modifier = Modifier.fillMaxHeight(0.60f)) {
             Text(
                 text = "Verify your\nphone number",
                 lineHeight = TextSize42,
@@ -129,6 +129,7 @@ fun EnterPhone(authViewModel: AuthViewModel, navController: NavController) {
                 val interactionSource = remember { MutableInteractionSource() }
                 val isFocussed = interactionSource.collectIsFocusedAsState()
                 BasicTextField(
+                    enabled = authViewModel.allowedToEditPhoneNumber.value,
                     interactionSource = interactionSource,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -148,7 +149,7 @@ fun EnterPhone(authViewModel: AuthViewModel, navController: NavController) {
                             it()
                         }
                     },
-                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                 )
 
             }

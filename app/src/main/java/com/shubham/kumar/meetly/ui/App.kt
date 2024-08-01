@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -29,7 +30,7 @@ fun App(){
         .background(color = Color.White),
         horizontalAlignment = Alignment.CenterHorizontally){
             val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = Screens.Dashboard.path){
+            NavHost(navController = navController, startDestination = Screens.Auth.path){
                 navigation(startDestination = Screens.EnterPhone.path ,route = Screens.Auth.path ){
                     composable(Screens.EnterPhone.path){
                         val authViewModel:AuthViewModel = it.sharedViewModel(navController = navController)
@@ -53,10 +54,10 @@ fun App(){
 }
 
 @Composable
-private fun <T> NavBackStackEntry.sharedViewModel(navController: NavController):T{
-    val navGraphRoute = destination.parent?.route?:return hiltViewModel()
+private inline fun <reified T:ViewModel> NavBackStackEntry.sharedViewModel(navController: NavController):T{
+    val navGraphRoute = destination.parent?.route?:return hiltViewModel<T>()
     val parentEntry = remember(this) {
         navController.getBackStackEntry(navGraphRoute)
     }
-    return hiltViewModel(parentEntry)
+    return hiltViewModel<T>(parentEntry)
 }
